@@ -1,0 +1,50 @@
+
+interface student {
+    firstName: string;
+    lastName: string;
+    age: number;
+    location: string;
+}
+
+const student1: student={
+    firstName: "Joae",
+    lastName: "Pedro",
+    age: 48,
+    location: "Kimana"
+};
+
+const student2: student={
+    firstName: "Abby",
+    lastName: "Pilale",
+    age: 24,
+    location: "Kuku"
+};
+
+const studentList: student[]=[
+    student1,
+    student2
+];
+
+function renderStudentsTable(): void {
+    const tbleBody = document.querySelector('#studentTable tbody');
+    if (!tbleBody) {
+    console.error('Error: Table body with ID "studentTable" not found in the HTML.');
+    return;
+}
+
+tbleBody.innerHTML = '';
+studentList.forEach(student => {
+    const row = document.createElement('tr');
+    const createAppendCell = (text: string | number): HTMLTableCellElement => {
+        const cell = document.createElement('td');
+        cell.textContent = String(text);
+        return cell;
+    };
+    row.appendChild(createAppendCell(student.firstName));
+    row.appendChild(createAppendCell(student.lastName));
+    row.appendChild(createAppendCell(student.age));
+    row.appendChild(createAppendCell(student.location));
+});
+}
+document.addEventListener('DOMContentLoaded', renderStudentsTable);
+console.log("Students List:", studentList);
